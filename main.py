@@ -21,7 +21,7 @@ def get_historical_data():
     return data['close'].values
 
 # Підготовка послідовностей для LSTM
-def prepare_data(data, look_back=5):
+def prepare_data(data, look_back=8):
     scaler = MinMaxScaler(feature_range=(0, 1))
     data_scaled = scaler.fit_transform(data.reshape(-1, 1))
     
@@ -34,8 +34,8 @@ def prepare_data(data, look_back=5):
 # Створення та навчання моделі LSTM
 def create_lstm_model(look_back=5):
     model = Sequential()
-    model.add(LSTM(50, input_shape=(look_back, 1), return_sequences=True))
-    model.add(LSTM(50))
+    model.add(LSTM(55, input_shape=(look_back, 1), return_sequences=True))
+    model.add(LSTM(55))
     model.add(Dense(1))
     model.compile(optimizer='adam', loss='mean_squared_error')
     return model
